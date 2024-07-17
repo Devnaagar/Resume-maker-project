@@ -15,7 +15,7 @@ let Datas= [{
     number: "734345345" , address: "dcbidsknckds",
     GitHub: "/GitHub/devnaagar ", LinkedIn:" /linkedIn/devnaagar", skills: ["javascript","CSS"] , 
     educations: ["12 pass ","10 pass"], Experience: ["none "],Projects: ["newapi ", "amazon clone"],
-    Postofresp:["leader "], Achivements:[" goldmedal"], Hobbies: [" games"]
+    Postofresp:["leader "], Achivements:[" goldmedal"]
 }];
     
 
@@ -49,6 +49,7 @@ app.get("/resume/:form_no/edit", (req,res)=>{
 app.patch("/resume/:form_no",(req,res)=>{
     let {form_no}=req.params;
     let newcont=req.body;
+    // console.log(newcont);
     let index = Datas.findIndex((p) => form_no === p.form_no);
     Datas[index] = { ...Datas[index], ...newcont };
     updateArrayField(Datas[index], 'skills', newcont.skills);
@@ -57,7 +58,6 @@ app.patch("/resume/:form_no",(req,res)=>{
     updateArrayField(Datas[index], 'Projects', newcont.Projects);
     updateArrayField(Datas[index], 'Postofresp', newcont.Postofresp);
     updateArrayField(Datas[index], 'Achivements', newcont.Achivements);
-    updateArrayField(Datas[index], 'Hobbies', newcont.Hobbies);
     
     res.redirect("/resume");
 })
