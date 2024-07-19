@@ -99,7 +99,7 @@ function Form(){
                                         <div class="col-lg-12 d-flex flex-wrap my-2">
                                             
                                             <div class="form-group col-lg-6 px-2">
-                                                <label for="Education" class="mb-1 form-label fw-bold">Education: </label><br/>
+                                                <label for="Education" class="mb-1 form-label fw-bold">Education : </label><br/>
                                                 <textarea placeholder="enter your text" name="educations" class="form-control col-lg-12"id="Education"></textarea>
                                             </div>
                                         </div>
