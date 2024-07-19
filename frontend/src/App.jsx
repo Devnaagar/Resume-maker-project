@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import {Sugar} from 'react-preloaders';
+import Form from './components/form';
 
 function App() {
   const [loading,setLoading]= useState(true);
@@ -16,8 +17,7 @@ function App() {
     (<Sugar time={4000} animation="slide-up" background="blur" color="white"/>
     ):(
       <div>
-        <h1 className='m-3'>hello world</h1>
-        <i className="fa-solid fa-house"></i>
+        <Form/>
       </div>
     );
 }
