@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../App.css'
 import Education from './sub_comp/education';
+import Experience from './sub_comp/experience';
+import Project from './sub_comp/projects';
 function Form(){
     const [forms, setForms] = useState([{ edu_id: 1 }]);
 
@@ -91,28 +93,11 @@ function Form(){
                                             </div>
                                         </div>
                                         <Education/>
+                                        <Experience/>
+                                        <Project/>
                                     </div>
                                         
                                     <div class="card-body">
-                                        
-                                        
-                                        <div class="col-lg-12 d-flex flex-wrap my-2">
-                                            
-                                            <div class="form-group col-lg-6 px-2">
-                                                <label for="Education" class="mb-1 form-label fw-bold">Education : </label><br/>
-                                                <textarea placeholder="enter your text" name="educations" class="form-control col-lg-12"id="Education"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 d-flex flex-wrap my-2">
-                                            <div class="form-group col-lg-6 px-2">
-                                                <label for="Experience" class="mb-1 form-label fw-bold">Experience</label><br/>
-                                                <textarea placeholder="enter your text" name="Experience" class="form-control col-lg-12"id="Experience"></textarea>
-                                            </div>
-                                            <div class="form-group col-lg-6 px-2">
-                                                <label for="Projects" class="mb-1 form-label fw-bold">Acedemic Projects:</label><br/>
-                                                <textarea placeholder="enter your text" name="Projects" class="form-control col-lg-12" id="Projects"></textarea>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12 d-flex flex-wrap my-2">
                                             <div class="form-group col-lg-6 px-2">
                                                 <label for="Achivements" class="mb-1 form-label fw-bold">Achivements</label><br/>
