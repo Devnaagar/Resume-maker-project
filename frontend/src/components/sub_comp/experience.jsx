@@ -1,73 +1,150 @@
 import React, { useState } from 'react';
-import '../../App.css'
-function Experience(){
+import '../../App.css';
+
+function Experience() {
     const [forms, setForms] = useState([{ exp_id: 1 }]);
+    const [formData, setFormData] = useState({
+        experience: {
+            'experience-1': {
+                work_name: '',
+                location: '',
+                start_mon: '',
+                end_mon: '',
+                desc_exp: ''
+            }
+        }
+    });
 
     const addForm = () => {
-        setForms([...forms, { exp_id: forms.length + 1 }]);
+        const newExpId = forms.length + 1;
+        setForms([...forms, { exp_id: newExpId }]);
+        setFormData(prevState => ({
+            ...prevState,
+            experience: {
+                ...prevState.experience,
+                [`experience-${newExpId}`]: {
+                    work_name: '',
+                    location: '',
+                    start_mon: '',
+                    end_mon: '',
+                    desc_exp: ''
+                }
+            }
+        }));
     };
-    return(
+
+    const handleChange = (e, expId) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            experience: {
+                ...prevState.experience,
+                [expId]: {
+                    ...prevState.experience[expId],
+                    [name]: value
+                }
+            }
+        }));
+    };
+
+    return (
         <>
             <div className="card mt-3">
                 <div className="mt-3 ms-2">
-                    <div class="row mx-2">
-                        <div class="col-lg-12 d-flex">
-                            <div class="col-lg-8"><h2 class="m-0"> Experience</h2></div>
+                    <div className="row mx-2">
+                        <div className="col-lg-12 d-flex">
+                            <div className="col-lg-8"><h2 className="m-0">Experience</h2></div>
                             <div className="col-lg-4 text-end">
-                                <button onClick={addForm} className="btn btn-primary mt-3" type='reset'>Add</button>
+                                <button onClick={addForm} className="btn btn-primary mt-3" type="reset">Add</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="card-body">
-                    <div>
-                        {forms.map((form, index) => (
-                            <div>
-                                <div className="card">
-                                    <div className="card-header m-0 p-2">
-                                        <div class="row ">
-                                            <div class="col-lg-12 d-flex">
-                                                <div class="col-lg-8"><h2 class="m-0">Experience Details {form.edu_id}</h2></div>
+                    {forms.map((form) => (
+                        <div key={form.exp_id}>
+                            <div className="card">
+                                <div className="card-header m-0 p-2">
+                                    <div className="row">
+                                        <div className="col-lg-12 d-flex">
+                                            <div className="col-lg-8">
+                                                <h2 className="m-0">Experience Details {form.exp_id}</h2>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-12 d-flex flex-wrap my-2" key={form.exp_id}>
-                                    <div className="form-group col-lg-12 px-2">
-                                        <label for={`work_name-${form.exp_id}`} className="mb-1 form-label fw-bold">Worked as</label>
-                                        <input placeholder="enter your GitHub profile" name={`work_name-${form.exp_id}`} className="form-control col-lg-12" 
-                                        id={`work_name-${form.exp_id}`} />
-                                    </div>
-                                </div>
-                                <div className="col-lg-12 d-flex flex-wrap my-2" key={form.exp_id}>
-                                    <div className="form-group col-lg-4 px-2">
-                                        <label for={`location-${form.exp_id}`} className="mb-1 form-label fw-bold">Location</label>
-                                        <input placeholder="enter your link" name={`location-${form.exp_id}`} className="form-control col-lg-12" id={`location-${form.exp_id}`} />
-                                    </div>
-                                    <div className="form-group col-lg-4 px-2">
-                                        <label for={`start_mon-${form.exp_id}`} className="mb-1 form-label fw-bold">Start Month</label>
-                                        <input type='date'placeholder="enter your GitHub profile" 
-                                        name={`start_mon-${form.exp_id}`} className="form-control col-lg-12" id={`start_mon-${form.exp_id}`} />
-                                    </div>
-                                    <div className="form-group col-lg-4 px-2">
-                                        <label for={`end_mon-${form.exp_id}`} className="mb-1 form-label fw-bold">End Month</label>
-                                        <input type='date' placeholder="enter your link" name={`end_mon-${form.exp_id}`} className="form-control col-lg-12" 
-                                        id={`end_mon-${form.exp_id}`} />
-                                    </div>
-                                </div>
-                                <div className="col-lg-12 d-flex flex-wrap my-2" key={form.exp_id}>
-                                    <div className="form-group col-lg-12 px-2">
-                                        <label for={`work_name-${form.exp_id}`} className="mb-1 form-label fw-bold">Description</label>
-                                        <textarea placeholder="enter your GitHub profile" name={`desc-${form.exp_id}`} className="form-control col-lg-12" id={`desc-${form.exp_id}`} />
-                                    </div>
-                                </div>
-                                <hr/>
                             </div>
-                        ))}
-                    </div>
+                            <div className="col-lg-12 d-flex flex-wrap my-2">
+                                <div className="form-group col-lg-12 px-2">
+                                    <label htmlFor={`work_name-${form.exp_id}`} className="mb-1 form-label fw-bold">Worked as</label>
+                                    <input 
+                                        placeholder="enter your GitHub profile" 
+                                        name="work_name" 
+                                        className="form-control col-lg-12" 
+                                        id={`work_name-${form.exp_id}`} 
+                                        value={formData.experience[`experience-${form.exp_id}`]?.work_name || ''}
+                                        onChange={(e) => handleChange(e, `experience-${form.exp_id}`)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-lg-12 d-flex flex-wrap my-2">
+                                <div className="form-group col-lg-4 px-2">
+                                    <label htmlFor={`location-${form.exp_id}`} className="mb-1 form-label fw-bold">Location</label>
+                                    <input 
+                                        placeholder="enter your link" 
+                                        name="location" 
+                                        className="form-control col-lg-12" 
+                                        id={`location-${form.exp_id}`} 
+                                        value={formData.experience[`experience-${form.exp_id}`]?.location || ''}
+                                        onChange={(e) => handleChange(e, `experience-${form.exp_id}`)}
+                                    />
+                                </div>
+                                <div className="form-group col-lg-4 px-2">
+                                    <label htmlFor={`start_mon-${form.exp_id}`} className="mb-1 form-label fw-bold">Start Month</label>
+                                    <input 
+                                        type="date" 
+                                        placeholder="enter your GitHub profile" 
+                                        name="start_mon" 
+                                        className="form-control col-lg-12" 
+                                        id={`start_mon-${form.exp_id}`} 
+                                        value={formData.experience[`experience-${form.exp_id}`]?.start_mon || ''}
+                                        onChange={(e) => handleChange(e, `experience-${form.exp_id}`)}
+                                    />
+                                </div>
+                                <div className="form-group col-lg-4 px-2">
+                                    <label htmlFor={`end_mon-${form.exp_id}`} className="mb-1 form-label fw-bold">End Month</label>
+                                    <input 
+                                        type="date" 
+                                        placeholder="enter your link" 
+                                        name="end_mon" 
+                                        className="form-control col-lg-12" 
+                                        id={`end_mon-${form.exp_id}`} 
+                                        value={formData.experience[`experience-${form.exp_id}`]?.end_mon || ''}
+                                        onChange={(e) => handleChange(e, `experience-${form.exp_id}`)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-lg-12 d-flex flex-wrap my-2">
+                                <div className="form-group col-lg-12 px-2">
+                                    <label htmlFor={`desc_exp-${form.exp_id}`} className="mb-1 form-label fw-bold">Description</label>
+                                    <textarea 
+                                        placeholder="enter your GitHub profile" 
+                                        name="desc_exp" 
+                                        className="form-control col-lg-12" 
+                                        id={`desc_exp-${form.exp_id}`} 
+                                        value={formData.experience[`experience-${form.exp_id}`]?.desc_exp || ''}
+                                        onChange={(e) => handleChange(e, `experience-${form.exp_id}`)}
+                                    />
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                    ))}
+                        
                 </div>
             </div>
         </>
-    )
+    );
 }
+
 export default Experience;

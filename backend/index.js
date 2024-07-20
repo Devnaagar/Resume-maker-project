@@ -10,57 +10,55 @@ app.set("view engine", "ejs");
 app.use(methodoverride('_method'));
 app.use(express.urlencoded({extended:true}));
 
-let Datas= [{
-    form_no: "1a", username: "dev", Email:"devakdjila@gmail.com", 
-    number: "734345345" , address: "dcbidsknckds",
-    GitHub: "/GitHub/devnaagar ", LinkedIn:" /linkedIn/devnaagar", skills: ["javascript","CSS"] , 
-    educations: ["12 pass ","10 pass"], Experience: ["none "],Projects: ["newapi ", "amazon clone"],
-    Postofresp:["leader "], Achivements:[" goldmedal"]
-}];
+// let Datas= [{
+//     form_no: "1a", username: "dev", Email:"devakdjila@gmail.com", 
+//     number: "734345345" , address: "dcbidsknckds",
+//     GitHub: "/GitHub/devnaagar ", LinkedIn:" /linkedIn/devnaagar", skills: ["javascript","CSS"] , 
+//     educations: ["12 pass ","10 pass"], Experience: ["none "],Projects: ["newapi ", "amazon clone"],
+//     Postofresp:["leader "], Achivements:[" goldmedal"]
+// }];
     
 
-app.get("/resume",(req,res)=>{
-    res.render('index.ejs', {Datas});
-})
+// app.get("/",(req,res)=>{
+//     console.log(object);
+// })
 
 // app.get("/resume/edit",(req,res)=>{
 //     res.render('form.ejs');
 // })
 //add form data to resume
-// app.post("/resume", (req,res)=>{
-//     let {username,Email,number,address}= req.body;
-//     let id = uuidv4();
-//     Datas.push({id,username,Email,number,address});
-//     res.redirect('/resume')
-// })
+app.post("/form_submit", (req,res)=>{
+    let all_info= req.body;
+    console.log(all_info);
+})
 
 //edit
-function updateArrayField(data, field, value) {
-    if (value) {
-        data[field] = value.split(",").map(item => item.trim());
-    }
-}
-app.get("/resume/:form_no/edit", (req,res)=>{
-    let {form_no}=req.params;
-    let data = Datas.find((p) => form_no === p.form_no);
-    res.render("form.ejs",{Datas});
+// function updateArrayField(data, field, value) {
+//     if (value) {
+//         data[field] = value.split(",").map(item => item.trim());
+//     }
+// }
+// app.get("/resume/:form_no/edit", (req,res)=>{
+//     let {form_no}=req.params;
+//     let data = Datas.find((p) => form_no === p.form_no);
+//     res.render("form.ejs",{Datas});
     
-})
-app.patch("/resume/:form_no",(req,res)=>{
-    let {form_no}=req.params;
-    let newcont=req.body;
-    // console.log(newcont);
-    let index = Datas.findIndex((p) => form_no === p.form_no);
-    Datas[index] = { ...Datas[index], ...newcont };
-    updateArrayField(Datas[index], 'skills', newcont.skills);
-    updateArrayField(Datas[index], 'educations', newcont.educations);
-    updateArrayField(Datas[index], 'Experience', newcont.Experience);
-    updateArrayField(Datas[index], 'Projects', newcont.Projects);
-    updateArrayField(Datas[index], 'Postofresp', newcont.Postofresp);
-    updateArrayField(Datas[index], 'Achivements', newcont.Achivements);
+// })
+// app.patch("/resume/:form_no",(req,res)=>{
+//     let {form_no}=req.params;
+//     let newcont=req.body;
+//     // console.log(newcont);
+//     let index = Datas.findIndex((p) => form_no === p.form_no);
+//     Datas[index] = { ...Datas[index], ...newcont };
+//     updateArrayField(Datas[index], 'skills', newcont.skills);
+//     updateArrayField(Datas[index], 'educations', newcont.educations);
+//     updateArrayField(Datas[index], 'Experience', newcont.Experience);
+//     updateArrayField(Datas[index], 'Projects', newcont.Projects);
+//     updateArrayField(Datas[index], 'Postofresp', newcont.Postofresp);
+//     updateArrayField(Datas[index], 'Achivements', newcont.Achivements);
     
-    res.redirect("/resume");
-})
+//     res.redirect("/resume");
+// })
 
 //download
 
