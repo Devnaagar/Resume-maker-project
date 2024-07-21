@@ -1,67 +1,23 @@
-const express= require('express');
-// const bootstrap = require('bootstrap');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const app = express();
 const port = 8080;
-// const {v4:uuidv4}= require('uuid');
-const methodoverride= require('method-override');
 
-app.use(express.static("public"));
-app.set("view engine", "ejs");
-app.use(methodoverride('_method'));
-app.use(express.urlencoded({extended:true}));
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
 
-// let Datas= [{
-//     form_no: "1a", username: "dev", Email:"devakdjila@gmail.com", 
-//     number: "734345345" , address: "dcbidsknckds",
-//     GitHub: "/GitHub/devnaagar ", LinkedIn:" /linkedIn/devnaagar", skills: ["javascript","CSS"] , 
-//     educations: ["12 pass ","10 pass"], Experience: ["none "],Projects: ["newapi ", "amazon clone"],
-//     Postofresp:["leader "], Achivements:[" goldmedal"]
-// }];
-    
+// Handle form submission
+app.post('/form_submit', (req, res) => {
+    const formData = req.body;
+    console.log('Form Data:', formData);
 
-// app.get("/",(req,res)=>{
-//     console.log(object);
-// })
+    // Respond with a success message
+    res.json({ message: 'Form data received successfully' });
+});
 
-// app.get("/resume/edit",(req,res)=>{
-//     res.render('form.ejs');
-// })
-//add form data to resume
-app.post("/form_submit", (req,res)=>{
-    let all_info= req.body;
-    console.log(all_info);
-})
-
-//edit
-// function updateArrayField(data, field, value) {
-//     if (value) {
-//         data[field] = value.split(",").map(item => item.trim());
-//     }
-// }
-// app.get("/resume/:form_no/edit", (req,res)=>{
-//     let {form_no}=req.params;
-//     let data = Datas.find((p) => form_no === p.form_no);
-//     res.render("form.ejs",{Datas});
-    
-// })
-// app.patch("/resume/:form_no",(req,res)=>{
-//     let {form_no}=req.params;
-//     let newcont=req.body;
-//     // console.log(newcont);
-//     let index = Datas.findIndex((p) => form_no === p.form_no);
-//     Datas[index] = { ...Datas[index], ...newcont };
-//     updateArrayField(Datas[index], 'skills', newcont.skills);
-//     updateArrayField(Datas[index], 'educations', newcont.educations);
-//     updateArrayField(Datas[index], 'Experience', newcont.Experience);
-//     updateArrayField(Datas[index], 'Projects', newcont.Projects);
-//     updateArrayField(Datas[index], 'Postofresp', newcont.Postofresp);
-//     updateArrayField(Datas[index], 'Achivements', newcont.Achivements);
-    
-//     res.redirect("/resume");
-// })
-
-//download
-
-app.listen(port ,()=>{
-    console.log(`The port number is : ${port}`);
-})
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
