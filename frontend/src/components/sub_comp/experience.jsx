@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
 import '../../App.css';
 
-function Experience() {
+function Experience({ setFormData, formData }) {
     const [forms, setForms] = useState([{ exp_id: 1 }]);
-    const [formData, setFormData] = useState({
-        experience: {
-            'experience-1': {
-                work_name: '',
-                location: '',
-                start_mon: '',
-                end_mon: '',
-                desc_exp: ''
-            }
-        }
-    });
 
     const addForm = () => {
         const newExpId = forms.length + 1;
@@ -55,7 +44,7 @@ function Experience() {
                         <div className="col-lg-12 d-flex">
                             <div className="col-lg-8"><h2 className="m-0">Experience</h2></div>
                             <div className="col-lg-4 text-end">
-                                <button onClick={addForm} className="btn btn-primary mt-3" type="reset">Add</button>
+                                <button onClick={addForm} className="btn btn-primary mt-3" type="button">Add</button>
                             </div>
                         </div>
                     </div>
@@ -78,7 +67,7 @@ function Experience() {
                                 <div className="form-group col-lg-12 px-2">
                                     <label htmlFor={`work_name-${form.exp_id}`} className="mb-1 form-label fw-bold">Worked as</label>
                                     <input 
-                                        placeholder="enter your GitHub profile" 
+                                        placeholder="e.g. - Software Developer" 
                                         name="work_name" 
                                         className="form-control col-lg-12" 
                                         id={`work_name-${form.exp_id}`} 
@@ -91,7 +80,7 @@ function Experience() {
                                 <div className="form-group col-lg-4 px-2">
                                     <label htmlFor={`location-${form.exp_id}`} className="mb-1 form-label fw-bold">Location</label>
                                     <input 
-                                        placeholder="enter your link" 
+                                        placeholder="Location" 
                                         name="location" 
                                         className="form-control col-lg-12" 
                                         id={`location-${form.exp_id}`} 
@@ -103,7 +92,6 @@ function Experience() {
                                     <label htmlFor={`start_mon-${form.exp_id}`} className="mb-1 form-label fw-bold">Start Month</label>
                                     <input 
                                         type="date" 
-                                        placeholder="enter your GitHub profile" 
                                         name="start_mon" 
                                         className="form-control col-lg-12" 
                                         id={`start_mon-${form.exp_id}`} 
@@ -115,7 +103,6 @@ function Experience() {
                                     <label htmlFor={`end_mon-${form.exp_id}`} className="mb-1 form-label fw-bold">End Month</label>
                                     <input 
                                         type="date" 
-                                        placeholder="enter your link" 
                                         name="end_mon" 
                                         className="form-control col-lg-12" 
                                         id={`end_mon-${form.exp_id}`} 
@@ -128,7 +115,7 @@ function Experience() {
                                 <div className="form-group col-lg-12 px-2">
                                     <label htmlFor={`desc_exp-${form.exp_id}`} className="mb-1 form-label fw-bold">Description</label>
                                     <textarea 
-                                        placeholder="enter your GitHub profile" 
+                                        placeholder="Describe your work experience" 
                                         name="desc_exp" 
                                         className="form-control col-lg-12" 
                                         id={`desc_exp-${form.exp_id}`} 
@@ -140,7 +127,6 @@ function Experience() {
                             <hr />
                         </div>
                     ))}
-                        
                 </div>
             </div>
         </>

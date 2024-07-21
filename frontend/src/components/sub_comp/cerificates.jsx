@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
 import '../../App.css';
 
-function Certificate() {
+function Certificate({ setFormData, formData }) {
     const [forms, setForms] = useState([{ certi_id: 1 }]);
-    const [formData, setFormData] = useState({
-        certificates: {
-            'certificates-1': {
-                cert_name: '',
-                link_drive: '',
-                month_year: '',
-                desc_cert: ''
-            }
-        }
-    });
 
     const addForm = () => {
-        const certiId = forms.length + 1;
-        setForms([...forms, { certi_id: certiId }]);
-        setFormData(prevState => ({
-            ...prevState,
-            certificates: {
-                ...prevState.certificates,
-                [`certificates-${certiId}`]: {
-                    cert_name: '',
-                    link_drive: '',
-                    month_year: '',
-                    desc_cert: ''
-                }
-            }
-        }));
+        setForms([...forms, { certi_id: forms.length + 1 }]);
     };
 
     const handleChange = (e, certiId) => {
