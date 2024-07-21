@@ -1,33 +1,10 @@
 import React, { useState } from 'react';
 
-function Project() {
+function Project({ setFormData, formData }) {
     const [forms, setForms] = useState([{ proj_id: 1 }]);
-    const [formData, setFormData] = useState({
-        project: {
-            'project-1': {
-                project_name: '',
-                link_dep: '',
-                tecno_used: '',
-                desc_pro: ''
-            }
-        }
-    });
 
     const addForm = () => {
-        const newProId = forms.length + 1;
-        setForms([...forms, { proj_id: newProId }]);
-        setFormData(prevState => ({
-            ...prevState,
-            project: {
-                ...prevState.project,
-                [`project-${newProId}`]: {
-                    project_name: '',
-                    link_dep: '',
-                    tecno_used: '',
-                    desc_pro: ''
-                }
-            }
-        }));
+        setForms([...forms, { proj_id: forms.length + 1 }]);
     };
 
     const handleChange = (e, projId) => {

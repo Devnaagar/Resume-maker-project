@@ -1,33 +1,10 @@
 import React, { useState } from 'react';
 
-function Education() {
+function Education({ setFormData, formData }) {
     const [forms, setForms] = useState([{ edu_id: 1 }]);
-    const [formData, setFormData] = useState({
-        education: {
-            'education-1': {
-                class_degree: '',
-                school: '',
-                percent_cgpa: '',
-                pass_year: ''
-            }
-        }
-    });
 
     const addForm = () => {
-        const eduId = forms.length + 1;
-        setForms([...forms, { edu_id: eduId }]);
-        setFormData(prevState => ({
-            ...prevState,
-            education: {
-                ...prevState.education,
-                [`education-${eduId}`]: {
-                    class_degree: '',
-                    school: '',
-                    percent_cgpa: '',
-                    pass_year: ''
-                }
-            }
-        }));
+        setForms([...forms, { edu_id: forms.length + 1 }]);
     };
 
     const handleChange = (e, eduId) => {
